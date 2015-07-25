@@ -1,12 +1,19 @@
 ## cachematrix.R
 ## The function is used to cache a matrix and then cache its inverse
+##
+## For this function, we assume that the matrix supplied is always invertible.
+## makeCacheMatrix: This function creates a special "matrix" object that can cache its inverse
+## cacheSolve: This function computes the inverse of the special "matrix"
+##             returned by makeCacheMatrix above. If the inverse has already been calculated
+##             (and the matrix has not changed), then the cachesolve should retrieve the inverse from the cache.
+##
 ## @Eric P.
 ## 2015-07-25 - First version for Coursera JHU R Programming course
 
 
 ## function makeCacheMatrix
-## used to save/get a matrix into a variable
-## as well as it inverse using various nested functions
+## used to save/get a matrix into a special object
+## as well as its inverse using various nested functions
 ## args :
 ##        x : matrix
 ##        inverse : inverse matrix for x
@@ -44,14 +51,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## function cacheSolve
-## used to retrieve inverse matrix from cache
-## or solve inverse matrix and cache it if it does not exists
+## used to retrieve inverse matrix from makeCacheMatrix object
+## or compute inverse matrix and cache it in makeCacheMatrix object if it does not exists
 ## args :
-##        x : matrix
+##        x : makeCacheMatrix object
 ##        ... : arguments for solve function
 ## returns :
 ##        matrix "x" inverse called "m"
-## call : var2 <- cacheSolve(<Matrix>)
+## call : var2 <- cacheSolve(<makeCacheMatrix object>)
 
 cacheSolve <- function(x, ...) {
   m <- x$getinverse() #get the current inverse matrix cached
